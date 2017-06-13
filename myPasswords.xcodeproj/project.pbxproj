@@ -13,6 +13,9 @@
 		FDCCBAF81EEC771400B7D151 /* myPasswords.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FDCCBAF61EEC771400B7D151 /* myPasswords.xcdatamodeld */; };
 		FDCCBAFA1EEC771400B7D151 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDCCBAF91EEC771400B7D151 /* Assets.xcassets */; };
 		FDCCBAFD1EEC771400B7D151 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDCCBAFB1EEC771400B7D151 /* LaunchScreen.storyboard */; };
+		FDCCBB051EEC83CC00B7D151 /* hand-holding-old-keys-1462981136Ul1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FDCCBB041EEC83CC00B7D151 /* hand-holding-old-keys-1462981136Ul1.jpg */; };
+		FDCCBB091EEC877600B7D151 /* binary Nums.png in Resources */ = {isa = PBXBuildFile; fileRef = FDCCBB081EEC877600B7D151 /* binary Nums.png */; };
+		FDCCBB0B1EEC9E9B00B7D151 /* ToDo in Resources */ = {isa = PBXBuildFile; fileRef = FDCCBB0A1EEC9E9B00B7D151 /* ToDo */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		FDCCBAF91EEC771400B7D151 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FDCCBAFC1EEC771400B7D151 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FDCCBAFE1EEC771400B7D151 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FDCCBB041EEC83CC00B7D151 /* hand-holding-old-keys-1462981136Ul1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "hand-holding-old-keys-1462981136Ul1.jpg"; sourceTree = "<group>"; };
+		FDCCBB081EEC877600B7D151 /* binary Nums.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "binary Nums.png"; sourceTree = "<group>"; };
+		FDCCBB0A1EEC9E9B00B7D151 /* ToDo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ToDo; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +46,9 @@
 		FDCCBAE31EEC771400B7D151 = {
 			isa = PBXGroup;
 			children = (
+				FDCCBB0A1EEC9E9B00B7D151 /* ToDo */,
+				FDCCBB041EEC83CC00B7D151 /* hand-holding-old-keys-1462981136Ul1.jpg */,
+				FDCCBB081EEC877600B7D151 /* binary Nums.png */,
 				FDCCBAEE1EEC771400B7D151 /* myPasswords */,
 				FDCCBAED1EEC771400B7D151 /* Products */,
 			);
@@ -99,6 +108,7 @@
 				TargetAttributes = {
 					FDCCBAEB1EEC771400B7D151 = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 6BEBP2F8T9;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -126,6 +136,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDCCBB051EEC83CC00B7D151 /* hand-holding-old-keys-1462981136Ul1.jpg in Resources */,
+				FDCCBB091EEC877600B7D151 /* binary Nums.png in Resources */,
+				FDCCBB0B1EEC9E9B00B7D151 /* ToDo in Resources */,
 				FDCCBAFD1EEC771400B7D151 /* LaunchScreen.storyboard in Resources */,
 				FDCCBAFA1EEC771400B7D151 /* Assets.xcassets in Resources */,
 				FDCCBAF51EEC771400B7D151 /* Main.storyboard in Resources */,
@@ -264,6 +277,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 6BEBP2F8T9;
 				INFOPLIST_FILE = myPasswords/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.WhatIfApps.myPasswords;
@@ -276,6 +290,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 6BEBP2F8T9;
 				INFOPLIST_FILE = myPasswords/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.WhatIfApps.myPasswords;

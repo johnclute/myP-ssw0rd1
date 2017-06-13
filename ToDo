@@ -1,0 +1,15 @@
+TODO
+Add Values for adding password info, Username, Password, Site, Questions, Entry name
+Add values to database
+Create Encriptions key file Entry name, Key
+Create Save function
+Create show function
+create delete entry from entry table
+Encrypte Password in database
+Save file to external file
+Makesure don't duplicate entry names
+'
+
+
+Implemented
+Created Screen
