@@ -4,7 +4,7 @@
         <attribute name="entryname" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="key" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Passwords" representedClassName="Passwords" syncable="YES" codeGenerationType="class">
+    <entity name="SiteRecord" representedClassName="SiteRecord" syncable="YES" codeGenerationType="class">
         <attribute name="entryname" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="questions" optional="YES" attributeType="String" syncable="YES"/>
@@ -13,6 +13,6 @@
     </entity>
     <elements>
         <element name="PasswordKeys" positionX="-54" positionY="27" width="128" height="75"/>
-        <element name="Passwords" positionX="-63" positionY="-18" width="128" height="120"/>
+        <element name="SiteRecord" positionX="-63" positionY="-18" width="128" height="120"/>
     </elements>
 </model>

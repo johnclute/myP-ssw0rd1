@@ -3,13 +3,16 @@ Add Values for adding password info, Username, Password, Site, Questions, Entry 
 Add values to database
 Create Encriptions key file Entry name, Key
 Create Save function
-Create show function
 create delete entry from entry table
-Encrypte Password in database
+Add Action button to save files
 Save file to external file
 Makesure don't duplicate entry names
-'
+create delete key on table
+load data from external file
 
 
 Implemented
 Created Screen
+Encrypte Password in database
+added done tab to keyboard
+close keyboard when pressing out side of keyboard

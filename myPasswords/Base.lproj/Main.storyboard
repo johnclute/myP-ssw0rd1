@@ -41,11 +41,11 @@
                                 <rect key="frame" x="115" y="49" width="244" height="30"/>
                                 <color key="backgroundColor" red="0.4686478856309646" green="0.9900521787966593" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Questions:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rcH-Yw-op9">
-                                <rect key="frame" x="16" y="172" width="81" height="21"/>
+                                <rect key="frame" x="16" y="202" width="81" height="21"/>
                                 <color key="backgroundColor" red="0.4686478856309646" green="0.9900521787966593" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="81" id="7AB-qm-N5Z"/>
@@ -56,7 +56,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="test text to see the box" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="5Yw-3R-G2l">
-                                <rect key="frame" x="115" y="172" width="244" height="106"/>
+                                <rect key="frame" x="115" y="202" width="244" height="76"/>
                                 <color key="backgroundColor" red="0.46864788559999998" green="0.99005217879999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -102,7 +102,7 @@
                                         <rect key="frame" x="0.0" y="28" width="343" height="16"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="R9z-V2-qTo" id="4U9-hn-zzk">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="16"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="15.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -131,7 +131,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KHA-jE-2by">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="8" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KHA-jE-2by">
                                 <rect key="frame" x="141" y="87" width="45" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.46974104249999998" green="0.99195643099999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -143,7 +143,7 @@
                                 <rect key="frame" x="115" y="125" width="244" height="30"/>
                                 <color key="backgroundColor" red="0.4686478856309646" green="0.9900521787966593" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="12"/>
+                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t1o-Jb-W5x">
@@ -157,6 +157,22 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SiteName:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bIp-hg-wcB">
+                                <rect key="frame" x="16" y="166" width="81" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.46974104249999998" green="0.99195643099999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RCk-0G-DZS">
+                                <rect key="frame" x="115" y="161" width="244" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.46974104249999998" green="0.99195643099999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.30121073395236497" green="1" blue="0.90814559221159374" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -200,7 +216,7 @@
                             <constraint firstItem="5S9-km-bPM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="oJF-kn-h8p"/>
                             <constraint firstItem="FZ8-cf-pBi" firstAttribute="leading" secondItem="UWN-XO-3Th" secondAttribute="trailing" constant="7" id="ooE-uW-2S8"/>
                             <constraint firstItem="5S9-km-bPM" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="20" id="pCg-Yt-P3D"/>
-                            <constraint firstItem="5Yw-3R-G2l" firstAttribute="top" secondItem="zFo-J8-0u7" secondAttribute="bottom" constant="17" id="qGC-YQ-Ihf"/>
+                            <constraint firstItem="5Yw-3R-G2l" firstAttribute="top" secondItem="zFo-J8-0u7" secondAttribute="bottom" constant="47" id="qGC-YQ-Ihf"/>
                             <constraint firstItem="UWN-XO-3Th" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="vB2-Sz-gzX"/>
                             <constraint firstItem="FZ8-cf-pBi" firstAttribute="trailing" secondItem="5Yw-3R-G2l" secondAttribute="trailing" id="w54-h9-JVQ"/>
                             <constraint firstItem="gqi-Dk-fCM" firstAttribute="top" secondItem="FZ8-cf-pBi" secondAttribute="bottom" constant="7" id="wbE-U8-CMN"/>
@@ -213,6 +229,7 @@
                         <outlet property="password" destination="zFo-J8-0u7" id="z03-iv-EVU"/>
                         <outlet property="passwordSize" destination="KHA-jE-2by" id="EY1-Uj-uGG"/>
                         <outlet property="searchTerm" destination="FZ8-cf-pBi" id="IaX-nk-TnC"/>
+                        <outlet property="siteName" destination="RCk-0G-DZS" id="WGT-vG-lFS"/>
                         <outlet property="siteTable" destination="gqi-Dk-fCM" id="w7c-ih-uR0"/>
                         <outlet property="userName" destination="qEk-Tl-5Xc" id="dDI-BH-jOm"/>
                     </connections>

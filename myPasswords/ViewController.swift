@@ -19,11 +19,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var userName: UITextField!
     
     @IBOutlet weak var password: UITextField!
+    
     @IBOutlet weak var loginQuestions: UITextView!
     
     @IBOutlet weak var searchTerm: UISearchBar!
     
     @IBOutlet weak var siteTable: UITableView!
+    
+    @IBOutlet weak var siteName: UITextField!
+    
+    var siteEntry = [String:Any]()
+    var siteEntryArray = Array <[String:Any]>()
     
     @IBAction func generatePassword(_ sender: Any) {
         var pwdLen = 9
@@ -39,6 +45,70 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @IBAction func saveUserInformation(_ sender: Any) {
+        if let sitename = siteName.text {
+            if let username = userName.text {
+                if let passwd = password.text {
+                    saveData(sitename: sitename, username: username, passwd: passwd)
+                }
+            }
+        }
+        
+    }
+    
+    func saveData( sitename: String, username: String, passwd: String)
+    {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let taskStorage = NSEntityDescription.insertNewObject(forEntityName: "SiteRecord", into: context)
+        taskStorage.setValue(sitename, forKey: "entryname")
+        taskStorage.setValue(passwd, forKey: "password")
+        taskStorage.setValue(username, forKey: "username")
+        taskStorage.setValue("", forKey: "site")
+        taskStorage.setValue(loginQuestions.text, forKey: "questions")
+        do {
+            try context.save()
+            print ("Saved! \(sitename)\n")
+            
+        } catch {
+            print ("Could not save users entry")
+        }
+        
+    }
+    
+    func getContext() -> NSManagedObjectContext {
+        /*
+         function: getContext
+         Purpose: Return context so that we can work with the CoreData
+         returns: Context - NSManagedObjectContext
+         */
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        return appDelegate.persistentContainer.viewContext
+        
+    }
+    
+    
+    func loadData() {
+        
+        let context = getContext()
+        
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "SiteRecord")
+        request.returnsObjectsAsFaults = false
+        
+        do {
+            let results = try context.fetch(request)
+            if results.count > 0 {
+                for result in results as! [NSManagedObject] {
+                    siteEntry["entryName"] = result.value(forKey: "entryname")
+                    siteEntry["userName"] = result.value(forKey: "username")
+                    siteEntry["password"] = result.value(forKey: "password")
+                    siteEntry["site"] = result.value(forKey: "site")
+                    siteEntry["loginQuestion"] = result.value(forKey: "questions")
+                    siteEntryArray.append(siteEntry)
+                }
+            }
+        } catch  {
+            print ("Could not get results from database\n")
+        }
     }
     
     func randomString(_ length: Int) -> String {
