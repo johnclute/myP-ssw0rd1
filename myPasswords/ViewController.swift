@@ -31,50 +31,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var siteEntry = [String:Any]()
     var siteEntryArray = Array <[String:Any]>()
     
-    @IBAction func generatePassword(_ sender: Any) {
-        var pwdLen = 9
-        if let tmp = passwordSize.text {
-            if tmp.characters.count > 0 {
-                pwdLen = Int(tmp)!
-            }
-        }
-        
-        let genPassword = randomString(pwdLen)
-        password.text = genPassword
-        
-    }
-    
-    @IBAction func saveUserInformation(_ sender: Any) {
-        if let sitename = siteName.text {
-            if let username = userName.text {
-                if let passwd = password.text {
-                    saveData(sitename: sitename, username: username, passwd: passwd)
-                }
-            }
-        }
-        
-    }
-    
-    func saveData( sitename: String, username: String, passwd: String)
-    {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-        let taskStorage = NSEntityDescription.insertNewObject(forEntityName: "SiteRecord", into: context)
-        taskStorage.setValue(sitename, forKey: "entryname")
-        taskStorage.setValue(passwd, forKey: "password")
-        taskStorage.setValue(username, forKey: "username")
-        taskStorage.setValue("", forKey: "site")
-        taskStorage.setValue(loginQuestions.text, forKey: "questions")
-        do {
-            try context.save()
-            print ("Saved! \(sitename)\n")
-            
-        } catch {
-            print ("Could not save users entry")
-        }
-        
-    }
-    
     func getContext() -> NSManagedObjectContext {
         /*
          function: getContext
@@ -87,7 +43,134 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     
+    @IBAction func clearTextFields(_ sender: Any) {
+        passwordSize.text = "9"
+        userName.text = ""
+        password.text = ""
+        loginQuestions.text = ""
+        searchTerm.text = ""
+        siteName.text = ""
+        
+    }
+    
+    @IBAction func btnGeneratePassword(_ sender: Any) {
+        var pwdLen = 9
+        if let tmp = passwordSize.text {
+            if tmp.characters.count > 0 {
+                pwdLen = Int(tmp)!
+            }
+        }
+        
+        let genPassword = randomString(pwdLen)
+        password.text = genPassword
+   
+    }
+    
+    
+    @IBAction func saveUserInformation(_ sender: Any) {
+        if let sitename = siteName.text {
+            if let username = userName.text {
+                if let passwd = password.text {
+                    saveData(sitename: sitename, username: username, passwd: passwd)
+                    
+                    siteName.text = ""
+                    userName.text = ""
+                    password.text = ""
+                    loginQuestions.text = ""
+                    
+                }
+            }
+        }
+        
+        loadData()
+        siteTable.reloadData()
+        
+    }
+    
+    func findSiteName(siteName: String) -> Bool {
+    
+        var found = false
+        let context = getContext()
+        
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "SiteRecord")
+        request.predicate = NSPredicate(format: "entryname = %@", siteName)
+        request.returnsObjectsAsFaults = false
+        
+        do {
+            let results = try context.fetch(request)
+            if results.count > 0 {
+                found = true
+            }
+        } catch  {
+            print ("Could not get results from database\n")
+            
+        }
+        
+        return found
+        
+    }
+    
+    func deleteEntry(sitename: String) -> Bool {
+ 
+        let context = getContext()
+        var deleted = false
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "SiteRecord")
+        request.predicate = NSPredicate(format: "((entryname == %@))", sitename)
+        request.returnsObjectsAsFaults = false
+        do {
+            let results = try context.fetch(request)
+            if results.count > 0 {
+                for result in results as! [NSManagedObject] {
+                    context.delete(result)
+                    do {
+                        try context.save()
+                        print ("Deleted record")
+                        deleted = true
+                    } catch {
+                        print("Delete did not work")
+                    }
+                }
+            }
+        } catch {
+            print("Fetch did not work properly")
+        }
+        
+        return deleted
+    }
+    
+    func saveData( sitename: String, username: String, passwd: String)
+    {
+        let context = getContext()
+        var deleted: Bool = true
+        let found = findSiteName(siteName: sitename)
+        if found {
+            deleted = deleteEntry(sitename: sitename)
+        }
+        if deleted {
+            let taskStorage = NSEntityDescription.insertNewObject(forEntityName: "SiteRecord", into: context)
+            taskStorage.setValue(sitename, forKey: "entryname")
+            taskStorage.setValue(passwd, forKey: "password")
+            taskStorage.setValue(username, forKey: "username")
+            taskStorage.setValue("", forKey: "site")
+            taskStorage.setValue(loginQuestions.text, forKey: "questions")
+            do {
+                try context.save()
+                print ("Saved! \(sitename)\n")
+        
+            } catch {
+                print ("Could not save users entry")
+            }
+        } else {
+            print("Did not create \(sitename)\n")
+        }
+        
+    }
+    
+    
+    
     func loadData() {
+        
+        siteEntryArray.removeAll()
         
         let context = getContext()
         
@@ -174,6 +257,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     override func viewDidAppear(_ animated: Bool) {
+        loadData()
         siteTable.reloadData()
     }
 
@@ -182,21 +266,54 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Dispose of any resources that can be recreated.
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        let sz = siteEntryArray.count
+        return sz
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell( style: UITableViewCellStyle.default, reuseIdentifier: "Cell")
-        cell.textLabel?.text = "Jim"
+        let cell = UITableViewCell( style: UITableViewCellStyle.value2, reuseIdentifier: "cell")
+        let siteEntry = siteEntryArray[indexPath.row]
+        let tableText = siteEntry["entryName"] as! String
+        let usern = siteEntry["userName"] as! String
+        cell.textLabel?.text = usern
+        cell.detailTextLabel?.text = tableText
+        
+       
         return cell
         
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath)
     {
+        if editingStyle == .delete {
+            let idx = indexPath.row
+            let siteEntry = siteEntryArray[idx]
+            let sitename = siteEntry["entryName"] as! String
+            let deleted = deleteEntry(sitename: sitename)
+            if deleted {
+                print ("Site entry \(sitename) deleted!\n")
+            } else {
+                print ("Site entry \(sitename) not deleted\n")
+            }
+            loadData()
+            siteTable.reloadData()
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let idx = indexPath.row
+        let siteEntry = siteEntryArray[idx]
+        let usern = siteEntry["userName"] as! String
+        let passwd = siteEntry["password"] as! String
+        let entryn = siteEntry["entryName"] as! String
+        let questions = siteEntry["loginQuestion"] as! String
+        
+        userName.text = usern
+        password.text = passwd
+        siteName.text = entryn
+        loginQuestions.text = questions
+        
     }
     
     
