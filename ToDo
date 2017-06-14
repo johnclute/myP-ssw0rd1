@@ -1,14 +1,10 @@
 TODO
-Add Values for adding password info, Username, Password, Site, Questions, Entry name
-Add values to database
 Create Encriptions key file Entry name, Key
-Create Save function
-create delete entry from entry table
 Add Action button to save files
 Save file to external file
-Makesure don't duplicate entry names
-create delete key on table
 load data from external file
+
+create search function
 
 
 Implemented
@@ -16,3 +12,11 @@ Created Screen
 Encrypte Password in database
 added done tab to keyboard
 close keyboard when pressing out side of keyboard
+Add Values for adding password info, Username, Password, Site, Questions, Entry name
+Add values to database
+create delete entry from entry table
+Makesure don't duplicate entry names
+create delete key on table
+Create Save function
+added to iphone
+Create Icon

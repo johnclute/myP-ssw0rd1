@@ -55,7 +55,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="test text to see the box" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="5Yw-3R-G2l">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="5Yw-3R-G2l">
                                 <rect key="frame" x="115" y="202" width="244" height="76"/>
                                 <color key="backgroundColor" red="0.46864788559999998" green="0.99005217879999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="17"/>
