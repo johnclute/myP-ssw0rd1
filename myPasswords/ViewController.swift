@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate
 {
 
   
@@ -30,6 +30,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var siteEntry = [String:Any]()
     var siteEntryArray = Array <[String:Any]>()
+    var searchActive: Bool = false
     
     func getContext() -> NSManagedObjectContext {
         /*
@@ -42,6 +43,31 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchActive = true
+        print("Begin Editing")
+    }
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchActive = false
+        print ("End Editing")
+//        loadData()
+//        siteTable.reloadData()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        print("Cancl Editing")
+        searchActive = false
+        searchBar.text = ""
+        loadData()
+        siteTable.reloadData()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        print("Search clicked")
+        searchActive = false
+        loadSearchData()
+        siteTable.reloadData()
+    }
     
     @IBAction func clearTextFields(_ sender: Any) {
         passwordSize.text = "9"
@@ -50,6 +76,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         loginQuestions.text = ""
         searchTerm.text = ""
         siteName.text = ""
+        loadData()
+        siteTable.reloadData()
         
     }
     
@@ -110,6 +138,40 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
+    @IBAction func clearAll(_ sender: Any) {
+        
+        let refreshAlert = UIAlertController(title: "Refresh", message: "All Passwords will be deleted.", preferredStyle: UIAlertControllerStyle.alert)
+        
+        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+            self.deleteAll()
+        }))
+        
+        refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+            print("Nothing deleted")
+        }))
+        
+        present(refreshAlert, animated: true, completion: nil)
+    }
+    
+    func deleteAll () {
+        var idx = 0
+        while idx < siteEntryArray.count {
+            siteEntry = siteEntryArray[idx]
+            let sitename = siteEntry["entryName"] as! String
+            let deleted = deleteEntry(sitename: sitename)
+            if deleted {
+                print ("Entry Deleted!")
+            } else {
+                print ("Entry not deleted")
+            }
+            idx += 1
+        }
+        loadData()
+        siteTable.reloadData()
+
+    }
+    
+    
     func deleteEntry(sitename: String) -> Bool {
  
         let context = getContext()
@@ -167,6 +229,37 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     
+    func loadSearchData() {
+        siteEntryArray.removeAll()
+        
+        let searchText = searchTerm.text!
+        
+        let context = getContext()
+        let sortDescriptor = NSSortDescriptor(key: "entryname", ascending: true)
+        let sortDescriptors = [sortDescriptor]
+        
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "SiteRecord")
+        request.sortDescriptors = sortDescriptors
+        request.predicate = NSPredicate(format: "entryname BEGINSWITH %@", searchText)
+        request.returnsObjectsAsFaults = false
+        
+        do {
+            let results = try context.fetch(request)
+            if results.count > 0 {
+                for result in results as! [NSManagedObject] {
+                    siteEntry["entryName"] = result.value(forKey: "entryname")
+                    siteEntry["userName"] = result.value(forKey: "username")
+                    siteEntry["password"] = result.value(forKey: "password")
+                    siteEntry["site"] = result.value(forKey: "site")
+                    siteEntry["loginQuestion"] = result.value(forKey: "questions")
+                    siteEntryArray.append(siteEntry)
+                }
+            }
+        } catch  {
+            print ("Could not get results from database\n")
+        }
+
+    }
     
     func loadData() {
         
@@ -301,7 +394,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             } else {
                 print ("Site entry \(sitename) not deleted\n")
             }
-            loadData()
+            if searchActive {
+                loadSearchData()
+            } else {
+                loadData()
+            }
             siteTable.reloadData()
         }
     }

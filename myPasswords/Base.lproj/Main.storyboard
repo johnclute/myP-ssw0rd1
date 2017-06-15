@@ -62,7 +62,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UWN-XO-3Th">
-                                <rect key="frame" x="16" y="305" width="58" height="21"/>
+                                <rect key="frame" x="16" y="304.5" width="58" height="21"/>
                                 <color key="backgroundColor" red="0.4686478856309646" green="0.9900521787966593" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="58" id="Xjd-D5-EsW"/>
@@ -75,7 +75,11 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WEH-eg-gSG">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <items>
-                                    <barButtonItem title="Clear all" id="d2E-fE-gce"/>
+                                    <barButtonItem title="Clear all" id="d2E-fE-gce">
+                                        <connections>
+                                            <action selector="clearAll:" destination="BYZ-38-t0r" id="RFx-Cm-jFr"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="8za-A6-cPN"/>
                                     <barButtonItem title="Save" id="RMS-Oo-2X2">
                                         <connections>
@@ -84,10 +88,17 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="FZ8-cf-pBi">
+                            <searchBar contentMode="redraw" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FZ8-cf-pBi">
                                 <rect key="frame" x="81" y="293" width="278" height="44"/>
                                 <color key="backgroundColor" red="0.4686478856309646" green="0.9900521787966593" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="JIL-3F-ayl"/>
+                                </connections>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="29" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gqi-Dk-fCM">
                                 <rect key="frame" x="16" y="344" width="343" height="269"/>
