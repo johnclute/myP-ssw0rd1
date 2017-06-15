@@ -173,8 +173,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         siteEntryArray.removeAll()
         
         let context = getContext()
-        
+        let sortDescriptor = NSSortDescriptor(key: "entryname", ascending: true)
+        let sortDescriptors = [sortDescriptor]
+
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "SiteRecord")
+        request.sortDescriptors = sortDescriptors
+//        request.predicate = NSPredicate(format: "entryname = %@","*")
         request.returnsObjectsAsFaults = false
         
         do {
@@ -249,6 +253,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         passwordSize.inputAccessoryView = toolBar
         password.inputAccessoryView = toolBar
         searchTerm.inputAccessoryView = toolBar
+        siteName.inputAccessoryView = toolBar
+        
         // -------------
     }
      override func viewDidLoad() {
