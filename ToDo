@@ -1,5 +1,4 @@
 TODO
-Create Encriptions key file Entry name, Key
 Add Action button to save files
 Save file to external file
 load data from external file
@@ -24,3 +23,7 @@ Sorting display list
 add done to sitename input text fields
 cleared out database.  Has an alert message in regards to deleteing everything.
 App now searches
+Create Encriptions key file Entry name, Key
+created ciphers, encrypting and decryption
+clearing screen when deleted data
+resetting fields completed

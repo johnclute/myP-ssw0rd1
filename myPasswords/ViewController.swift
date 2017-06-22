@@ -16,6 +16,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     let fudgeFactor = 100
     
+
+    @IBOutlet weak var btnSave: UIBarButtonItem!
+    
     @IBOutlet weak var passwordSize: UITextField!
     
     @IBOutlet weak var userName: UITextField!
@@ -48,6 +51,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchActive = true
         print("Begin Editing")
+        btnSave.isEnabled = false
     }
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         searchActive = false
@@ -69,10 +73,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         searchActive = false
         loadSearchData()
         siteTable.reloadData()
+        
     }
     
     @IBAction func clearTextFields(_ sender: Any) {
         clearFields()
+        if btnSave.isEnabled == true {
+            btnSave.isEnabled = false
+        }
     }
     func clearFields() {
         passwordSize.text = "9"
@@ -96,7 +104,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let genPassword = randomString(pwdLen)
         password.text = genPassword
-   
+        if btnSave.isEnabled == false {
+            btnSave.isEnabled = true
+        }
+        // want to save password now
+        if btnSave.isEnabled == false {
+            btnSave.isEnabled = true
+        }
     }
     
     
@@ -114,7 +128,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 }
             }
         }
-        
+        // want to save password now
+        if btnSave.isEnabled == true {
+            btnSave.isEnabled = false
+        }
         loadData()
         siteTable.reloadData()
         
@@ -439,15 +456,26 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
+        if btnSave.isEnabled == false {
+            btnSave.isEnabled = true
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        // want to save password now
+        if btnSave.isEnabled == false {
+            btnSave.isEnabled = true
+        }
         return true
     }
     
     func doneClicked() {
         view.endEditing(true)
+        // want to save password now
+        if btnSave.isEnabled == false {
+            btnSave.isEnabled = true
+        }
     }
     
    
@@ -484,6 +512,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         clearFields()
         loadData()
         siteTable.reloadData()
+        
+        if btnSave.isEnabled == true {
+            btnSave.isEnabled = false
+        }
 
     }
 
@@ -501,7 +533,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let siteEntry = siteEntryArray[indexPath.row]
         let tableText = siteEntry["entryName"] as! String
         // was using detail and label to do display info, now just using textlabel
-        cell.textLabel?.text = tableText
+
+        cell.detailTextLabel?.text = tableText
        // let usern = siteEntry["userName"] as! String
        // cell.textLabel?.text = usern
        // cell.detailTextLabel?.text = tableText
@@ -553,6 +586,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         password.text = passwd
         siteName.text = entryn
         loginQuestions.text = questions
+        
+        //want to make sure save is not turned on and save data by accident.
+        if btnSave.isEnabled == true {
+            btnSave.isEnabled = false
+        }
         
     }
     

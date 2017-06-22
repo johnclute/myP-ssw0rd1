@@ -277,6 +277,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnSave" destination="RMS-Oo-2X2" id="Rmi-LB-XH1"/>
                         <outlet property="loginQuestions" destination="5Yw-3R-G2l" id="1wd-La-PYI"/>
                         <outlet property="password" destination="zFo-J8-0u7" id="z03-iv-EVU"/>
                         <outlet property="passwordSize" destination="KHA-jE-2by" id="EY1-Uj-uGG"/>
