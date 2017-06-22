@@ -11,8 +11,10 @@ import CoreData
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate
 {
-
-  
+    let utils = PassWordUtils()
+    let oldCipher = "eiyohY7waoteeYiqu4faezaem7Gii6No5saxi1ochungaethaeliecieToo7jaexekeeCoh8quaor6aetheilaeyeemeethong8kohXei4ohtib4ietaeda2iepeu1ohg7eiFo3aw9yeenoh3Theoy7ahgik1Vimailet2ixeichiesune1eezow2kighohph8eeng4aiP4haekai3Iexaewuizeekee5rohwooqu2xahzoo7phaingung1GaCoongi5miqu4AhDohGaish2nu7xie6ohsee7waighuaSeij6li5eekai0EiSaen7ingei6ha7oovee7apoh1ohLiequ4uoK5axahGhahng6oop1zishahdu0die8ohBaevo6fohGh6die9aithiele8rieyeiB1oodeth9phaequ2ZaexaisheiM1aengii0thieWoh6tieGh0aeziechahcagh4daR7ath4gaeM5wieghul3sah0quahrei1eHie9yaishuo4Gi6ua4aiShoiGh4pheibialae6VaemeeT3za4oomigie4eucieveinoeGah2aeHool1Aiquae6OoZivieDo0eeMai4xah2lahGh2heichaod0ohnoKeefe9Aet1IeThewooLeicei2ziolai6ahsio4Aechiv6cheeghuoviN8Keighi5aish8ic0shoh3ooh6aefaeghaijei8IeMiechiengutheinge5uo5Dath5ra8Umae3eghaoheikaesh7ichoh6Zoveel1nish0ta6Pohv4saiwiqu1Aing7zae1ohsaS0ii5wooRe4tae2queepea0tei1ohquaij6eec2hoo2eeDu3aiWeiRiecugh5phaerooc5googai4xeup9sheiliaTei8de2quee5eer8enuS0gu1peanohthei6ohDoothaedo2dooy8aquaecha8ohguquaihao0Aepei3ukug7aiTaqu0iwiLoc8vie8iehah9choh"
+    
+    let fudgeFactor = 100
     
     @IBOutlet weak var passwordSize: UITextField!
     
@@ -70,6 +72,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @IBAction func clearTextFields(_ sender: Any) {
+        clearFields()
+    }
+    func clearFields() {
         passwordSize.text = "9"
         userName.text = ""
         password.text = ""
@@ -78,7 +83,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         siteName.text = ""
         loadData()
         siteTable.reloadData()
-        
+  
     }
     
     @IBAction func btnGeneratePassword(_ sender: Any) {
@@ -138,6 +143,30 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
+    func findSiteKeyName(siteName: String) -> String {
+        // get cipher from table
+        var cipher = ""
+        let context = getContext()
+        
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "SiteKeys")
+        request.predicate = NSPredicate(format: "entryname = %@", siteName)
+        request.returnsObjectsAsFaults = false
+        
+        do {
+            let results = try context.fetch(request)
+            if results.count > 0 {
+                for result in results as! [NSManagedObject] {
+                    cipher = result.value(forKey: "key") as! String
+                }
+            }
+        } catch  {
+            print ("Could not get results from database\n")
+            
+        }
+        
+        return cipher
+        
+    }
     @IBAction func clearAll(_ sender: Any) {
         
         let refreshAlert = UIAlertController(title: "Refresh", message: "All Passwords will be deleted.", preferredStyle: UIAlertControllerStyle.alert)
@@ -158,7 +187,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         while idx < siteEntryArray.count {
             siteEntry = siteEntryArray[idx]
             let sitename = siteEntry["entryName"] as! String
-            let deleted = deleteEntry(sitename: sitename)
+            var deleted = deleteEntry(sitename: sitename)
+            if deleted {
+                print ("Entry Deleted!")
+            } else {
+                print ("Entry not deleted")
+            }
+            deleted = deleteKeyEntry(sitename: sitename)
             if deleted {
                 print ("Entry Deleted!")
             } else {
@@ -168,6 +203,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         loadData()
         siteTable.reloadData()
+        clearFields()
 
     }
     
@@ -200,8 +236,73 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return deleted
     }
     
+    func deleteKeyEntry(sitename: String) -> Bool {
+        
+        let context = getContext()
+        var deleted = false
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "SiteKeys")
+        request.predicate = NSPredicate(format: "((entryname == %@))", sitename)
+        request.returnsObjectsAsFaults = false
+        do {
+            let results = try context.fetch(request)
+            if results.count > 0 {
+                for result in results as! [NSManagedObject] {
+                    context.delete(result)
+                    do {
+                        try context.save()
+                        print ("Deleted record")
+                        deleted = true
+                    } catch {
+                        print("Delete did not work")
+                    }
+                }
+            }
+        } catch {
+            print("Fetch did not work properly")
+        }
+        
+        return deleted
+    }
+
+    func saveKeyData(sitename: String, key: String) {
+        
+        let cipher = findSiteKeyName(siteName: sitename)
+        if cipher.characters.count == 0 {
+            let context = getContext()
+            let keyStorage = NSEntityDescription.insertNewObject(forEntityName: "SiteKeys", into: context)
+
+            keyStorage.setValue(sitename, forKey: "entryname")
+            keyStorage.setValue(key, forKey: "key")
+            do {
+                try context.save()
+                print ("Saved! \(sitename)\n")
+                
+            } catch {
+                print ("Could not save users entry")
+            }
+        } else {
+            print("Did not create \(sitename)\n")
+        }
+        
+    }
+    
+    func createCipher(sz: Int) -> String {
+        let cipher = randomString(sz)
+        return cipher
+    }
+    
+    
     func saveData( sitename: String, username: String, passwd: String)
     {
+        var cipher = findSiteKeyName(siteName: sitename)
+        if cipher.characters.count == 0 {
+            var sz = loginQuestions.text.characters.count + fudgeFactor
+            if sz == 0 {
+                sz = passwd.characters.count + fudgeFactor
+            }
+            cipher = randomString(sz)
+            saveKeyData(sitename: sitename, key: cipher)
+        }
         let context = getContext()
         var deleted: Bool = true
         let found = findSiteName(siteName: sitename)
@@ -209,12 +310,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             deleted = deleteEntry(sitename: sitename)
         }
         if deleted {
+ 
+            let utfCipher = [UInt8](cipher.utf8)
+            let newUserName = utils.encryptValue(text: [UInt8](username.utf8), cipher: utfCipher)
+            let newPasswd = utils.encryptValue(text: [UInt8](passwd.utf8), cipher: utfCipher)
+            let newQuestions = utils.encryptValue(text: [UInt8](loginQuestions.text.utf8), cipher: utfCipher)
             let taskStorage = NSEntityDescription.insertNewObject(forEntityName: "SiteRecord", into: context)
             taskStorage.setValue(sitename, forKey: "entryname")
-            taskStorage.setValue(passwd, forKey: "password")
-            taskStorage.setValue(username, forKey: "username")
+            taskStorage.setValue(newPasswd, forKey: "password")
+            taskStorage.setValue(newUserName, forKey: "username")
             taskStorage.setValue("", forKey: "site")
-            taskStorage.setValue(loginQuestions.text, forKey: "questions")
+            taskStorage.setValue(newQuestions, forKey: "questions")
             do {
                 try context.save()
                 print ("Saved! \(sitename)\n")
@@ -231,9 +337,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func loadSearchData() {
         siteEntryArray.removeAll()
-        
+        var cipher = ""
         let searchText = searchTerm.text!
-        
         let context = getContext()
         let sortDescriptor = NSSortDescriptor(key: "entryname", ascending: true)
         let sortDescriptors = [sortDescriptor]
@@ -248,10 +353,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             if results.count > 0 {
                 for result in results as! [NSManagedObject] {
                     siteEntry["entryName"] = result.value(forKey: "entryname")
-                    siteEntry["userName"] = result.value(forKey: "username")
-                    siteEntry["password"] = result.value(forKey: "password")
+                    cipher = findSiteKeyName(siteName: siteEntry["entryName"] as! String)
+                    let utfCipher = [UInt8](cipher.utf8)
+                    let tmpUser = result.value(forKey: "username") as! String
+                    siteEntry["userName"] = utils.decryptValue(encrypted: [UInt8](tmpUser.utf8), cipher: utfCipher)
+                    let tmpPwd = result.value(forKey: "password") as! String
+                    siteEntry["password"] = utils.decryptValue(encrypted: [UInt8](tmpPwd.utf8), cipher: utfCipher)
                     siteEntry["site"] = result.value(forKey: "site")
-                    siteEntry["loginQuestion"] = result.value(forKey: "questions")
+                    let tmpQuest = result.value(forKey: "questions") as! String
+                    siteEntry["loginQuestion"] = utils.decryptValue(encrypted: [UInt8](tmpQuest.utf8), cipher: utfCipher)
                     siteEntryArray.append(siteEntry)
                 }
             }
@@ -264,7 +374,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func loadData() {
         
         siteEntryArray.removeAll()
-        
+        // setting up cipher,
+        var cipher = ""
         let context = getContext()
         let sortDescriptor = NSSortDescriptor(key: "entryname", ascending: true)
         let sortDescriptors = [sortDescriptor]
@@ -279,10 +390,24 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             if results.count > 0 {
                 for result in results as! [NSManagedObject] {
                     siteEntry["entryName"] = result.value(forKey: "entryname")
-                    siteEntry["userName"] = result.value(forKey: "username")
-                    siteEntry["password"] = result.value(forKey: "password")
+                    // get key
+                    cipher = findSiteKeyName(siteName: siteEntry["entryName"] as! String)
+                    print("Cipher - \(cipher)\n")
+                    if cipher.characters.count == 0 {
+                        cipher = oldCipher
+                    }
+                    let utfCipher = [UInt8](cipher.utf8)
+                    let tmpUser = result.value(forKey: "username") as! String
+                    
+                    siteEntry["userName"] = utils.decryptValue(encrypted: [UInt8](tmpUser.utf8), cipher: utfCipher)
+                    let tmpPwd = result.value(forKey: "password") as! String
+                    siteEntry["password"] = utils.decryptValue(encrypted: [UInt8](tmpPwd.utf8), cipher: utfCipher)
                     siteEntry["site"] = result.value(forKey: "site")
-                    siteEntry["loginQuestion"] = result.value(forKey: "questions")
+                    let tmpQuest = result.value(forKey: "questions") as! String
+                    siteEntry["loginQuestion"] = utils.decryptValue(encrypted: [UInt8](tmpQuest.utf8), cipher: utfCipher)
+                    
+                    print("encrypted data - \(tmpUser) \(tmpPwd) \(tmpQuest)\n")
+                    
                     siteEntryArray.append(siteEntry)
                 }
             }
@@ -356,8 +481,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     override func viewDidAppear(_ animated: Bool) {
+        clearFields()
         loadData()
         siteTable.reloadData()
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -373,9 +500,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let cell = UITableViewCell( style: UITableViewCellStyle.value2, reuseIdentifier: "cell")
         let siteEntry = siteEntryArray[indexPath.row]
         let tableText = siteEntry["entryName"] as! String
-        let usern = siteEntry["userName"] as! String
-        cell.textLabel?.text = usern
-        cell.detailTextLabel?.text = tableText
+        // was using detail and label to do display info, now just using textlabel
+        cell.textLabel?.text = tableText
+       // let usern = siteEntry["userName"] as! String
+       // cell.textLabel?.text = usern
+       // cell.detailTextLabel?.text = tableText
         
        
         return cell
@@ -388,7 +517,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let idx = indexPath.row
             let siteEntry = siteEntryArray[idx]
             let sitename = siteEntry["entryName"] as! String
-            let deleted = deleteEntry(sitename: sitename)
+            var deleted = deleteEntry(sitename: sitename)
+            if deleted {
+                print ("Site entry \(sitename) deleted!\n")
+            } else {
+                print ("Site entry \(sitename) not deleted\n")
+            }
+            deleted = deleteKeyEntry(sitename: sitename)
             if deleted {
                 print ("Site entry \(sitename) deleted!\n")
             } else {
@@ -400,6 +535,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 loadData()
             }
             siteTable.reloadData()
+            clearFields()
+            
         }
     }
     

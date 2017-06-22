@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16F73" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="PasswordKeys" representedClassName="PasswordKeys" syncable="YES" codeGenerationType="class">
+    <entity name="SiteKeys" representedClassName="SiteKeys" syncable="YES" codeGenerationType="class">
         <attribute name="entryname" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="key" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
@@ -12,7 +12,7 @@
         <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="PasswordKeys" positionX="-54" positionY="27" width="128" height="75"/>
-        <element name="SiteRecord" positionX="-63" positionY="-18" width="128" height="120"/>
+        <element name="SiteKeys" positionX="-54" positionY="27" width="128" height="75"/>
+        <element name="SiteRecord" positionX="-54" positionY="18" width="128" height="120"/>
     </elements>
 </model>
