@@ -8,14 +8,27 @@
 
 import UIKit
 import CoreData
+import Security
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate
 {
+    
+    enum KeychainError: Error {
+        case noPassword
+        case unexpectedPasswordData
+        case unexpectedItemData
+        case unhandledError(status: OSStatus)
+    }
     let utils = PassWordUtils()
-    let oldCipher = "eiyohY7waoteeYiqu4faezaem7Gii6No5saxi1ochungaethaeliecieToo7jaexekeeCoh8quaor6aetheilaeyeemeethong8kohXei4ohtib4ietaeda2iepeu1ohg7eiFo3aw9yeenoh3Theoy7ahgik1Vimailet2ixeichiesune1eezow2kighohph8eeng4aiP4haekai3Iexaewuizeekee5rohwooqu2xahzoo7phaingung1GaCoongi5miqu4AhDohGaish2nu7xie6ohsee7waighuaSeij6li5eekai0EiSaen7ingei6ha7oovee7apoh1ohLiequ4uoK5axahGhahng6oop1zishahdu0die8ohBaevo6fohGh6die9aithiele8rieyeiB1oodeth9phaequ2ZaexaisheiM1aengii0thieWoh6tieGh0aeziechahcagh4daR7ath4gaeM5wieghul3sah0quahrei1eHie9yaishuo4Gi6ua4aiShoiGh4pheibialae6VaemeeT3za4oomigie4eucieveinoeGah2aeHool1Aiquae6OoZivieDo0eeMai4xah2lahGh2heichaod0ohnoKeefe9Aet1IeThewooLeicei2ziolai6ahsio4Aechiv6cheeghuoviN8Keighi5aish8ic0shoh3ooh6aefaeghaijei8IeMiechiengutheinge5uo5Dath5ra8Umae3eghaoheikaesh7ichoh6Zoveel1nish0ta6Pohv4saiwiqu1Aing7zae1ohsaS0ii5wooRe4tae2queepea0tei1ohquaij6eec2hoo2eeDu3aiWeiRiecugh5phaerooc5googai4xeup9sheiliaTei8de2quee5eer8enuS0gu1peanohthei6ohDoothaedo2dooy8aquaecha8ohguquaihao0Aepei3ukug7aiTaqu0iwiLoc8vie8iehah9choh"
+  
+    let key = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-_"
     
     let fudgeFactor = 100
+    var secQuest = ""
+    let secMask = "*************************"
     
+    
+    @IBOutlet weak var showPassword: UISlider!
 
     @IBOutlet weak var btnSave: UIBarButtonItem!
     
@@ -36,6 +49,57 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var siteEntry = [String:Any]()
     var siteEntryArray = Array <[String:Any]>()
     var searchActive: Bool = false
+    
+    @IBAction func actShowPassword(_ sender: Any) {
+        let status = showPassword.value
+        if status == 1 {
+            password.isSecureTextEntry = false
+            loginQuestions.text = secQuest
+        } else if status == 0 {
+            password.isSecureTextEntry = true
+            loginQuestions.text = secMask
+        }
+    }
+    
+    func makeRandom(sz:Int) -> String {
+        
+        let rv = generateRandomBytes(arraySize: sz)
+        let cnt = sz
+        let cryptkey = Array(key.characters)
+        print ("Size of data \( cnt ) ")
+        var i = 0
+        var idx = 0
+        var pwd=""
+        let sz = cryptkey.count
+        print ("\(sz)")
+        
+        for byte in rv {
+            i = i+1
+            idx = Int(byte)
+            print ("\(i): \(byte) \(cryptkey[idx])")
+            pwd.append(cryptkey[idx])
+        }
+        return pwd
+    }
+    
+    func generateRandomBytes(arraySize: Int) -> Data {
+        let pwdLen = arraySize
+        
+        var keyData = Data(count: pwdLen)
+        let result = keyData.withUnsafeMutableBytes {
+            (mutableBytes: UnsafeMutablePointer<UInt8>) -> Int32 in
+            SecRandomCopyBytes(kSecRandomDefault, keyData.count, mutableBytes)
+        }
+        //  for byte in keyData { print(byte) }
+        
+        if result == errSecSuccess {
+            return keyData
+        } else {
+            print("Problem generating random bytes")
+            return Data()
+        }
+    }
+    
     
     func getContext() -> NSManagedObjectContext {
         /*
@@ -89,6 +153,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         loginQuestions.text = ""
         searchTerm.text = ""
         siteName.text = ""
+        secQuest = ""
         loadData()
         siteTable.reloadData()
   
@@ -96,13 +161,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBAction func btnGeneratePassword(_ sender: Any) {
         var pwdLen = 9
-        if let tmp = passwordSize.text {
-            if tmp.characters.count > 0 {
-                pwdLen = Int(tmp)!
-            }
+        
+        if let tmplen = passwordSize.text {
+            pwdLen = Int(tmplen)!
         }
         
-        let genPassword = randomString(pwdLen)
+        let genPassword = makeRandom(sz: pwdLen)
         password.text = genPassword
         if btnSave.isEnabled == false {
             btnSave.isEnabled = true
@@ -240,7 +304,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     do {
                         try context.save()
                         print ("Deleted record")
-                        deleted = true
+                        let del = deletePass(siteName: sitename)
+                        if del {
+                            deleted = true
+                        } else {
+                            print("Delete did not work in keychain")
+                        }
                     } catch {
                         print("Delete did not work")
                     }
@@ -304,7 +373,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func createCipher(sz: Int) -> String {
-        let cipher = randomString(sz)
+        let cipher = makeRandom(sz: sz)
         return cipher
     }
     
@@ -317,7 +386,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             if sz == 0 {
                 sz = passwd.characters.count + fudgeFactor
             }
-            cipher = randomString(sz)
+            cipher = makeRandom(sz: sz)
             saveKeyData(sitename: sitename, key: cipher)
         }
         let context = getContext()
@@ -340,6 +409,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             taskStorage.setValue(newQuestions, forKey: "questions")
             do {
                 try context.save()
+                savePasswordKeyChain()
                 print ("Saved! \(sitename)\n")
         
             } catch {
@@ -351,6 +421,24 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
+    func savePasswordKeyChain() {
+        // Check that text has been entered into both the account and password fields.
+        guard let newAccountName = siteName.text, let newPassword = password.text, !newAccountName.isEmpty && !newPassword.isEmpty else { return }
+        
+        // Check if we need to update an existing item or create a new one.
+        do {
+            // This is a new account, create a new keychain item with the account name.
+            let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName, account: newAccountName, accessGroup: KeychainConfiguration.accessGroup)
+                
+            // Save the password for the new item.
+            try passwordItem.savePassword(newPassword)
+        }
+        catch {
+            fatalError("Error updating keychain - \(error)")
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
     
     func loadSearchData() {
         siteEntryArray.removeAll()
@@ -379,6 +467,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     siteEntry["site"] = result.value(forKey: "site")
                     let tmpQuest = result.value(forKey: "questions") as! String
                     siteEntry["loginQuestion"] = utils.decryptValue(encrypted: [UInt8](tmpQuest.utf8), cipher: utfCipher)
+                    siteEntry["password"] = getpass(siteName: result.value(forKey: "entryName") as! String)
                     siteEntryArray.append(siteEntry)
                 }
             }
@@ -386,6 +475,39 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             print ("Could not get results from database\n")
         }
 
+    }
+    
+    func deletePass( siteName: String) -> Bool {
+        var rc = true
+        do {
+            let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName, account: siteName, accessGroup: KeychainConfiguration.accessGroup)
+            
+            try passwordItem.deleteItem()
+        }
+        catch {
+            rc = false
+            fatalError("Error reading password from keychain - \(error)")
+        }
+
+        return rc
+    }
+    
+    func getpass(siteName: String) -> String {
+        var rc = ""
+        do {
+            let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName, account: siteName, accessGroup: KeychainConfiguration.accessGroup)
+            
+            let accnt = passwordItem.account
+            print(accnt)
+            rc = try passwordItem.readPassword()
+            print (rc)
+        }
+        catch KeychainError.noPassword {
+            rc = ""
+        } catch {
+            rc=""
+        }
+        return rc
     }
     
     func loadData() {
@@ -410,9 +532,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     // get key
                     cipher = findSiteKeyName(siteName: siteEntry["entryName"] as! String)
                     print("Cipher - \(cipher)\n")
-                    if cipher.characters.count == 0 {
-                        cipher = oldCipher
-                    }
                     let utfCipher = [UInt8](cipher.utf8)
                     let tmpUser = result.value(forKey: "username") as! String
                     
@@ -420,33 +539,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     let tmpPwd = result.value(forKey: "password") as! String
                     siteEntry["password"] = utils.decryptValue(encrypted: [UInt8](tmpPwd.utf8), cipher: utfCipher)
                     siteEntry["site"] = result.value(forKey: "site")
+                    let tmpsite = siteEntry["entryName"] as! String
                     let tmpQuest = result.value(forKey: "questions") as! String
                     siteEntry["loginQuestion"] = utils.decryptValue(encrypted: [UInt8](tmpQuest.utf8), cipher: utfCipher)
                     
                     print("encrypted data - \(tmpUser) \(tmpPwd) \(tmpQuest)\n")
-                    
+                    siteEntry["password"] = getpass(siteName: tmpsite)
                     siteEntryArray.append(siteEntry)
                 }
             }
         } catch  {
             print ("Could not get results from database\n")
         }
-    }
-    
-    func randomString(_ length: Int) -> String {
-        
-        let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-        let len = UInt32(letters.length)
-        
-        var randomString = ""
-        
-        for _ in 0 ..< length {
-            let rand = arc4random_uniform(len)
-            var nextChar = letters.character(at: Int(rand))
-            randomString += NSString(characters: &nextChar, length: 1) as String
-        }
-        
-        return randomString
     }
     
     /// Close textfield keyboard when finishing editing.
@@ -583,9 +687,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let questions = siteEntry["loginQuestion"] as! String
         
         userName.text = usern
+        showPassword.value = 0
+        password.isSecureTextEntry = true
         password.text = passwd
         siteName.text = entryn
-        loginQuestions.text = questions
+        loginQuestions.text = secMask
+        secQuest = questions
+
         
         //want to make sure save is not turned on and save data by accident.
         if btnSave.isEnabled == true {

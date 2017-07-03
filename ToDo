@@ -27,3 +27,6 @@ Create Encriptions key file Entry name, Key
 created ciphers, encrypting and decryption
 clearing screen when deleted data
 resetting fields completed
+added data protection entitlements
+set text to detailtextlable instead of titlelabel for output in table.
+
