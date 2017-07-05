@@ -25,7 +25,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     let fudgeFactor = 100
     var secQuest = ""
-    let secMask = "**********************************************************************************"
+    let secMask = "*************************"
     
     
     @IBOutlet weak var showPassword: UISlider!
