@@ -164,7 +164,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func isNumeric(input: String) -> Int {
         var rc = 0
         rc = 1
-        let numberCharacters = NSCharacterSet.decimalDigits
+        let numberCharacters = NSCharacterSet.decimalDigits.inverted
         if !input.isEmpty && input.rangeOfCharacter(from: numberCharacters) == nil {
             rc = Int(input)!
         } else {
