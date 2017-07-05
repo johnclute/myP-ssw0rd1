@@ -25,7 +25,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     let fudgeFactor = 100
     var secQuest = ""
-    let secMask = "*************************"
+    let secMask = "**********************************************************************************"
     
     
     @IBOutlet weak var showPassword: UISlider!
@@ -57,7 +57,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             loginQuestions.text = secQuest
         } else if status == 0 {
             password.isSecureTextEntry = true
-            loginQuestions.text = secMask
+            if !secQuest.isEmpty {
+             loginQuestions.text = secMask
+            }
         }
     }
     
@@ -159,11 +161,25 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
   
     }
     
+    func isNumeric(input: String) -> Int {
+        var rc = 0
+        rc = 1
+        let numberCharacters = NSCharacterSet.decimalDigits
+        if !input.isEmpty && input.rangeOfCharacter(from: numberCharacters) == nil {
+            rc = Int(input)!
+        } else {
+            rc = 0
+        }
+        return rc
+    }
+    
     @IBAction func btnGeneratePassword(_ sender: Any) {
         var pwdLen = 9
         
         if let tmplen = passwordSize.text {
-            pwdLen = Int(tmplen)!
+            
+            pwdLen = isNumeric(input: tmplen)
+            if pwdLen == 0 {return}
         }
         
         let genPassword = makeRandom(sz: pwdLen)
@@ -696,7 +712,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         password.isSecureTextEntry = true
         password.text = passwd
         siteName.text = entryn
-        loginQuestions.text = secMask
+        if !questions.isEmpty {
+            loginQuestions.text = secMask
+        } else {
+            loginQuestions.text = ""
+        }
         secQuest = questions
 
         
