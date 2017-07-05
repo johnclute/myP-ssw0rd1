@@ -181,14 +181,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBAction func saveUserInformation(_ sender: Any) {
         if let sitename = siteName.text {
             if let username = userName.text {
-                if let passwd = password.text {
+                if let sz = password.text?.characters.count {
+                    if sz == 0 {return}
+                    let passwd = makeRandom(sz: sz)
                     saveData(sitename: sitename, username: username, passwd: passwd)
-                    
                     siteName.text = ""
                     userName.text = ""
                     password.text = ""
                     loginQuestions.text = ""
-                    
                 }
             }
         }
@@ -421,23 +421,28 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
-    func savePasswordKeyChain() {
-        // Check that text has been entered into both the account and password fields.
-        guard let newAccountName = siteName.text, let newPassword = password.text, !newAccountName.isEmpty && !newPassword.isEmpty else { return }
+    func savePassword(inPassword: String, inSiteName: String) {
         
-        // Check if we need to update an existing item or create a new one.
         do {
             // This is a new account, create a new keychain item with the account name.
-            let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName, account: newAccountName, accessGroup: KeychainConfiguration.accessGroup)
-                
+            let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName, account: inSiteName, accessGroup: KeychainConfiguration.accessGroup)
+            
             // Save the password for the new item.
-            try passwordItem.savePassword(newPassword)
+            try passwordItem.savePassword(inPassword)
         }
         catch {
             fatalError("Error updating keychain - \(error)")
         }
         
-        dismiss(animated: true, completion: nil)
+  
+    }
+    
+    
+    func savePasswordKeyChain() {
+        // Check that text has been entered into both the account and password fields.
+        guard let newAccountName = siteName.text, let newPassword = password.text, !newAccountName.isEmpty && !newPassword.isEmpty else { return }
+        
+        savePassword(inPassword: newPassword, inSiteName: newAccountName)
     }
     
     func loadSearchData() {
