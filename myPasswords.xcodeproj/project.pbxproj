@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FD674C291F0AEB3D0065F145 /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD674C281F0AEB3D0065F145 /* KeychainPasswordItem.swift */; };
+		FD202D461F1EA9E40069C16A /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD202D451F1EA9E40069C16A /* KeychainPasswordItem.swift */; };
 		FD674C2B1F0AEDBE0065F145 /* KeychainConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD674C2A1F0AEDBE0065F145 /* KeychainConfiguration.swift */; };
 		FD9626F91EFA2C3100C8567A /* UtilityFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9626F81EFA2C3100C8567A /* UtilityFile.swift */; };
 		FDCCBAF01EEC771400B7D151 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCCBAEF1EEC771400B7D151 /* AppDelegate.swift */; };
@@ -22,7 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		FD674C281F0AEB3D0065F145 /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeychainPasswordItem.swift; path = ../../GenericKeychain/GenericKeychain/KeychainPasswordItem.swift; sourceTree = "<group>"; };
+		FD202D451F1EA9E40069C16A /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
 		FD674C2A1F0AEDBE0065F145 /* KeychainConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeychainConfiguration.swift; path = ../../GenericKeychain/GenericKeychain/KeychainConfiguration.swift; sourceTree = "<group>"; };
 		FD7A4C5A1EFC5383007A8080 /* myPasswords.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = myPasswords.entitlements; sourceTree = "<group>"; };
 		FD9626F81EFA2C3100C8567A /* UtilityFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityFile.swift; sourceTree = "<group>"; };
@@ -73,7 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				FD7A4C5A1EFC5383007A8080 /* myPasswords.entitlements */,
-				FD674C281F0AEB3D0065F145 /* KeychainPasswordItem.swift */,
+				FD202D451F1EA9E40069C16A /* KeychainPasswordItem.swift */,
 				FD674C2A1F0AEDBE0065F145 /* KeychainConfiguration.swift */,
 				FDCCBAEF1EEC771400B7D151 /* AppDelegate.swift */,
 				FDCCBAF11EEC771400B7D151 /* ViewController.swift */,
@@ -169,8 +169,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD674C2B1F0AEDBE0065F145 /* KeychainConfiguration.swift in Sources */,
-				FD674C291F0AEB3D0065F145 /* KeychainPasswordItem.swift in Sources */,
 				FD9626F91EFA2C3100C8567A /* UtilityFile.swift in Sources */,
+				FD202D461F1EA9E40069C16A /* KeychainPasswordItem.swift in Sources */,
 				FDCCBAF21EEC771400B7D151 /* ViewController.swift in Sources */,
 				FDCCBAF01EEC771400B7D151 /* AppDelegate.swift in Sources */,
 				FDCCBAF81EEC771400B7D151 /* myPasswords.xcdatamodeld in Sources */,
