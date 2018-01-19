@@ -1,9 +1,10 @@
 TODO
-Add Action button to save files
-Save file to external file
-load data from external file
 
-create search function
+add index to entry name
+remove search function.
+save passwords and store them into a text field to be later encrypted into notesn  this way you don't lose data.
+Remove Search line, add it to the bottom of the app
+also add a way to save the passwords to a notepad file, to be encrypted by the system.
 
 
 Implemented
@@ -29,4 +30,13 @@ clearing screen when deleted data
 resetting fields completed
 added data protection entitlements
 set text to detailtextlable instead of titlelabel for output in table.
-
+load data from external file
+add user name to password save
+create function to return username
+add login questions to password save
+create function to return login questions
+Fixed search functionality, had an exception when loading seared data, it was trying to add site, which not longer was in the data.
+If a user closes the keyboard when they are editing, if all fields are blank the save button is not enabled.
+When closing the keyboard for search the value in search text clears out and searchbar is reset.
+Added buttons for deleting and saving password entries
+Nav bar is no longer visible and Item buttons  are gone.

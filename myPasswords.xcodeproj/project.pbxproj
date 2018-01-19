@@ -7,36 +7,42 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FD202D461F1EA9E40069C16A /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD202D451F1EA9E40069C16A /* KeychainPasswordItem.swift */; };
-		FD674C2B1F0AEDBE0065F145 /* KeychainConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD674C2A1F0AEDBE0065F145 /* KeychainConfiguration.swift */; };
+		FD1A27B91F1E7BBF001D7843 /* myPasswords.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = FD1A27B81F1E7BBF001D7843 /* myPasswords.xcdatamodel */; };
+		FD935FDF1F59D9DB00638135 /* PassWordUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD935FDE1F59D9DB00638135 /* PassWordUtility.swift */; };
+		FD935FE11F59DA0700638135 /* DictionaryList.txt in Resources */ = {isa = PBXBuildFile; fileRef = FD935FE01F59DA0700638135 /* DictionaryList.txt */; };
 		FD9626F91EFA2C3100C8567A /* UtilityFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9626F81EFA2C3100C8567A /* UtilityFile.swift */; };
 		FDCCBAF01EEC771400B7D151 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCCBAEF1EEC771400B7D151 /* AppDelegate.swift */; };
 		FDCCBAF21EEC771400B7D151 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCCBAF11EEC771400B7D151 /* ViewController.swift */; };
 		FDCCBAF51EEC771400B7D151 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDCCBAF31EEC771400B7D151 /* Main.storyboard */; };
-		FDCCBAF81EEC771400B7D151 /* myPasswords.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FDCCBAF61EEC771400B7D151 /* myPasswords.xcdatamodeld */; };
 		FDCCBAFA1EEC771400B7D151 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDCCBAF91EEC771400B7D151 /* Assets.xcassets */; };
 		FDCCBAFD1EEC771400B7D151 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDCCBAFB1EEC771400B7D151 /* LaunchScreen.storyboard */; };
 		FDCCBB051EEC83CC00B7D151 /* hand-holding-old-keys-1462981136Ul1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FDCCBB041EEC83CC00B7D151 /* hand-holding-old-keys-1462981136Ul1.jpg */; };
 		FDCCBB091EEC877600B7D151 /* binary Nums.png in Resources */ = {isa = PBXBuildFile; fileRef = FDCCBB081EEC877600B7D151 /* binary Nums.png */; };
 		FDCCBB0B1EEC9E9B00B7D151 /* ToDo in Resources */ = {isa = PBXBuildFile; fileRef = FDCCBB0A1EEC9E9B00B7D151 /* ToDo */; };
+		FDD30E1A20096E38009FE1C7 /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD30E1920096E38009FE1C7 /* KeychainPasswordItem.swift */; };
+		FDD30E1E20097997009FE1C7 /* KeychainConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD30E1D20097997009FE1C7 /* KeychainConfiguration.swift */; };
+		FDE22DFD1F21389E0050A267 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = FDE22DFC1F21389E0050A267 /* LICENSE.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		FD202D451F1EA9E40069C16A /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
-		FD674C2A1F0AEDBE0065F145 /* KeychainConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeychainConfiguration.swift; path = ../../GenericKeychain/GenericKeychain/KeychainConfiguration.swift; sourceTree = "<group>"; };
+		FD1A27B81F1E7BBF001D7843 /* myPasswords.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; name = myPasswords.xcdatamodel; path = myPasswords.xcdatamodeld/myPasswords.xcdatamodel; sourceTree = "<group>"; };
 		FD7A4C5A1EFC5383007A8080 /* myPasswords.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = myPasswords.entitlements; sourceTree = "<group>"; };
+		FD935FDE1F59D9DB00638135 /* PassWordUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassWordUtility.swift; sourceTree = "<group>"; };
+		FD935FE01F59DA0700638135 /* DictionaryList.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DictionaryList.txt; sourceTree = "<group>"; };
 		FD9626F81EFA2C3100C8567A /* UtilityFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityFile.swift; sourceTree = "<group>"; };
 		FDCCBAEC1EEC771400B7D151 /* myPasswords.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myPasswords.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDCCBAEF1EEC771400B7D151 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FDCCBAF11EEC771400B7D151 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FDCCBAF41EEC771400B7D151 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		FDCCBAF71EEC771400B7D151 /* myPasswords.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = myPasswords.xcdatamodel; sourceTree = "<group>"; };
 		FDCCBAF91EEC771400B7D151 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FDCCBAFC1EEC771400B7D151 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FDCCBAFE1EEC771400B7D151 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FDCCBB041EEC83CC00B7D151 /* hand-holding-old-keys-1462981136Ul1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "hand-holding-old-keys-1462981136Ul1.jpg"; sourceTree = "<group>"; };
 		FDCCBB081EEC877600B7D151 /* binary Nums.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "binary Nums.png"; sourceTree = "<group>"; };
 		FDCCBB0A1EEC9E9B00B7D151 /* ToDo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ToDo; sourceTree = "<group>"; };
+		FDD30E1920096E38009FE1C7 /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
+		FDD30E1D20097997009FE1C7 /* KeychainConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainConfiguration.swift; sourceTree = "<group>"; };
+		FDE22DFC1F21389E0050A267 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,7 +59,10 @@
 		FDCCBAE31EEC771400B7D151 = {
 			isa = PBXGroup;
 			children = (
+				FD935FE01F59DA0700638135 /* DictionaryList.txt */,
+				FD935FDE1F59D9DB00638135 /* PassWordUtility.swift */,
 				FDCCBB0A1EEC9E9B00B7D151 /* ToDo */,
+				FDE22DFC1F21389E0050A267 /* LICENSE.txt */,
 				FDCCBB041EEC83CC00B7D151 /* hand-holding-old-keys-1462981136Ul1.jpg */,
 				FDCCBB081EEC877600B7D151 /* binary Nums.png */,
 				FDCCBAEE1EEC771400B7D151 /* myPasswords */,
@@ -72,16 +81,16 @@
 		FDCCBAEE1EEC771400B7D151 /* myPasswords */ = {
 			isa = PBXGroup;
 			children = (
+				FD1A27B81F1E7BBF001D7843 /* myPasswords.xcdatamodel */,
 				FD7A4C5A1EFC5383007A8080 /* myPasswords.entitlements */,
-				FD202D451F1EA9E40069C16A /* KeychainPasswordItem.swift */,
-				FD674C2A1F0AEDBE0065F145 /* KeychainConfiguration.swift */,
+				FDD30E1D20097997009FE1C7 /* KeychainConfiguration.swift */,
 				FDCCBAEF1EEC771400B7D151 /* AppDelegate.swift */,
 				FDCCBAF11EEC771400B7D151 /* ViewController.swift */,
 				FDCCBAF31EEC771400B7D151 /* Main.storyboard */,
 				FDCCBAF91EEC771400B7D151 /* Assets.xcassets */,
+				FDD30E1920096E38009FE1C7 /* KeychainPasswordItem.swift */,
 				FDCCBAFB1EEC771400B7D151 /* LaunchScreen.storyboard */,
 				FDCCBAFE1EEC771400B7D151 /* Info.plist */,
-				FDCCBAF61EEC771400B7D151 /* myPasswords.xcdatamodeld */,
 				FD9626F81EFA2C3100C8567A /* UtilityFile.swift */,
 			);
 			path = myPasswords;
@@ -114,15 +123,19 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = creativeApps;
 				TargetAttributes = {
 					FDCCBAEB1EEC771400B7D151 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 6BEBP2F8T9;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.DataProtection = {
+								enabled = 0;
+							};
+							com.apple.Keychain = {
 								enabled = 1;
 							};
 						};
@@ -154,10 +167,12 @@
 			files = (
 				FDCCBB051EEC83CC00B7D151 /* hand-holding-old-keys-1462981136Ul1.jpg in Resources */,
 				FDCCBB091EEC877600B7D151 /* binary Nums.png in Resources */,
+				FD935FE11F59DA0700638135 /* DictionaryList.txt in Resources */,
 				FDCCBB0B1EEC9E9B00B7D151 /* ToDo in Resources */,
 				FDCCBAFD1EEC771400B7D151 /* LaunchScreen.storyboard in Resources */,
 				FDCCBAFA1EEC771400B7D151 /* Assets.xcassets in Resources */,
 				FDCCBAF51EEC771400B7D151 /* Main.storyboard in Resources */,
+				FDE22DFD1F21389E0050A267 /* LICENSE.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,12 +183,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD674C2B1F0AEDBE0065F145 /* KeychainConfiguration.swift in Sources */,
+				FD1A27B91F1E7BBF001D7843 /* myPasswords.xcdatamodel in Sources */,
+				FD935FDF1F59D9DB00638135 /* PassWordUtility.swift in Sources */,
 				FD9626F91EFA2C3100C8567A /* UtilityFile.swift in Sources */,
-				FD202D461F1EA9E40069C16A /* KeychainPasswordItem.swift in Sources */,
 				FDCCBAF21EEC771400B7D151 /* ViewController.swift in Sources */,
 				FDCCBAF01EEC771400B7D151 /* AppDelegate.swift in Sources */,
-				FDCCBAF81EEC771400B7D151 /* myPasswords.xcdatamodeld in Sources */,
+				FDD30E1E20097997009FE1C7 /* KeychainConfiguration.swift in Sources */,
+				FDD30E1A20096E38009FE1C7 /* KeychainPasswordItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,7 +226,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -218,7 +236,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -261,7 +283,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -269,7 +293,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -302,9 +330,10 @@
 				DEVELOPMENT_TEAM = 6BEBP2F8T9;
 				INFOPLIST_FILE = myPasswords/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.WhatIfApps.myPasswords;
+				PRODUCT_BUNDLE_IDENTIFIER = com.WhatIfApps.myPsswrds1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -316,9 +345,10 @@
 				DEVELOPMENT_TEAM = 6BEBP2F8T9;
 				INFOPLIST_FILE = myPasswords/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.WhatIfApps.myPasswords;
+				PRODUCT_BUNDLE_IDENTIFIER = com.WhatIfApps.myPsswrds1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -344,19 +374,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		FDCCBAF61EEC771400B7D151 /* myPasswords.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				FDCCBAF71EEC771400B7D151 /* myPasswords.xcdatamodel */,
-			);
-			currentVersion = FDCCBAF71EEC771400B7D151 /* myPasswords.xcdatamodel */;
-			path = myPasswords.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = FDCCBAE41EEC771400B7D151 /* Project object */;
 }
